@@ -20,10 +20,6 @@ $(call inherit-product, device/htc/msm8960-common/msm8960.mk)
 # overlays
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 
-# Boot animation
-TARGET_SCREEN_HEIGHT := 1920
-TARGET_SCREEN_WIDTH := 1080
-
 # Ramdisk
 PRODUCT_PACKAGES += \
     fstab.qcom \
@@ -60,6 +56,10 @@ PRODUCT_CHARACTERISTICS := nosdcard
 
 PRODUCT_PACKAGES += \
     libnetcmdiface
+
+# Get the long list of APNs
+PRODUCT_COPY_FILES += \
+    device/htc/m7-common/apns-conf.xml:system/etc/apns-conf.xml
 
 # Wifi config
 PRODUCT_COPY_FILES += \
@@ -107,10 +107,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     libaudioamp
 
-# Camera
-PRODUCT_PACKAGES += \
-    camera.msm8960
-
 # GPS
 PRODUCT_PACKAGES += \
     gps.msm8960
@@ -127,10 +123,6 @@ PRODUCT_PACKAGES += \
     Nfc \
     Tag \
     com.android.nfc_extras
-
-# Misc Packages
-PRODUCT_PACKAGES += \
-    Torch
 
 # Prepatch to fix BT/WiFi bus lockups
 PRODUCT_COPY_FILES += \
@@ -173,7 +165,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.opengles.version=196608 \
     ro.telephony.call_ring.multiple=false \
     ro.telephony.call_ring.delay=3000 \
-    ro.vendor.extension_library=/system/vendor/lib/libqc-opt.so
+    ro.vendor.extension_library=/system/lib/libqc-opt.so
 
 # Set build date
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
